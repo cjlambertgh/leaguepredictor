@@ -1,0 +1,58 @@
+﻿@model LeaguePredictor.Models.PlayerScoresViewModel
+
+@{
+    ViewBag.Title = "Selections";
+}
+
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <h3>Player: @Model.PlayerPicks.Player</h3>
+    <div class="col-sm-6 col-xs-12">
+        <h4>Premier League</h4>
+        <table class="table table-striped">
+            <tr>
+                <th>Prediction</th>
+                <th>Team</th>
+                <th>Actual</th>
+                <th>Correct?</th>
+                <th>Points</th>
+            </tr>
+            @foreach (var m in Model.PlayerPicks.Selections.Where(pp => pp.League == "Premier League").OrderBy(pp => pp.Position))
+            {
+                var actualPosition = @Model.CurrentLeaguePosition.Where(lp => lp.Team == m.Team).Select(lp => lp.Position).Single();
+                <tr>
+                    <td>@m.Position</td>
+                    <td>@m.Team</td>
+                    <td>@actualPosition</td>
+                    <td>@(actualPosition == @m.Position ? "Y" : "N")</td>
+                    <td>@Model.Points[@m]</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+        <h4>Championship</h4>
+        <table class="table table-striped">
+            <tr>
+                <th>Prediction</th>
+                <th>Team</th>
+                <th>Actual</th>
+                <th>Correct?</th>
+                <th>Points</th>
+            </tr>
+            @foreach (var m in Model.PlayerPicks.Selections.Where(pp => pp.League == "Championship").OrderBy(pp => pp.Position))
+            {
+                var actualPosition = @Model.CurrentLeaguePosition.Where(lp => lp.Team == m.Team).Select(lp => lp.Position).Single();
+                <tr>
+                    <td>@m.Position</td>
+                    <td>@m.Team</td>
+                    <td>@actualPosition</td>
+                    <td>@(actualPosition == @m.Position ? "Y" : "N")</td>
+                    <td>@Model.Points[@m]</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

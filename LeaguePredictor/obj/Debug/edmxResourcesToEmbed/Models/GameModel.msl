@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="leaguepredictorModelStoreContainer" CdmEntityContainer="leaguepredictorEntities">
+    <EntitySetMapping Name="teams">
+      <EntityTypeMapping TypeName="leaguepredictorModel.team">
+        <MappingFragment StoreEntitySet="team">
+          <ScalarProperty Name="league_id" ColumnName="league_id" />
+          <ScalarProperty Name="team_name" ColumnName="team_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="leagues">
+      <EntityTypeMapping TypeName="leaguepredictorModel.league">
+        <MappingFragment StoreEntitySet="league">
+          <ScalarProperty Name="league_name" ColumnName="league_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="players_selections">
+      <EntityTypeMapping TypeName="leaguepredictorModel.players_selections">
+        <MappingFragment StoreEntitySet="players_selections">
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="team_id" ColumnName="team_id" />
+          <ScalarProperty Name="player_id" ColumnName="player_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="team_rankings">
+      <EntityTypeMapping TypeName="leaguepredictorModel.team_rankings">
+        <MappingFragment StoreEntitySet="team_rankings">
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="team_id" ColumnName="team_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="players">
+      <EntityTypeMapping TypeName="leaguepredictorModel.player">
+        <MappingFragment StoreEntitySet="players">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

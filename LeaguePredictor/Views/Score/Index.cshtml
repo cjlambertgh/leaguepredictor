@@ -1,0 +1,30 @@
+﻿@model IEnumerable<LeaguePredictor.Models.LeagueTableModel>
+
+@{
+    ViewBag.Title = "Current Ranking";
+}
+
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <table class="table table-striped">
+        <tr>
+            <th>Position</th>
+            <th>Player</th>
+            <th>Score</th>
+            <th>Correct predictions</th>
+            <th></th>
+        </tr>
+        @foreach(var m in Model)
+        {
+            <tr>
+                <td>@m.Position</td>
+                <td>@m.Player</td>
+                <td>@m.Points</td>
+                <td>@m.Correct</td>
+                <td>@Html.ActionLink("Details", "PlayerScores", new { @m.ID })</td>
+            </tr>
+        }
+    </table>
+</div>

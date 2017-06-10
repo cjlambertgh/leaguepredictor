@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Team Selections";
+}
+@using LeaguePredictor.Models
+@model TeamSelectionsViewModel
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <h3>Select team positions</h3>
+    <div>
+        
+        @using (@Html.BeginForm("TeamSelections", "Game", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(mode => Model.Name, new { @class = "form-control" })
+            </div>
+            <h4>Premier League</h4>
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem1)
+                @Html.DropDownList("Prem1", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem2)
+                @Html.DropDownList("Prem2", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem3)
+                @Html.DropDownList("Prem3", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem4)
+                @Html.DropDownList("Prem4", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem5)
+                @Html.DropDownList("Prem5", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem6)
+                @Html.DropDownList("Prem6", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem18)
+                @Html.DropDownList("Prem18", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem19)
+                @Html.DropDownList("Prem19", Model.PremTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Prem20)
+                @Html.DropDownList("Prem20", Model.PremTeams, new { @class = "form-control" })
+            </div>
+
+            <h4>Championship</h4>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ1)
+                @Html.DropDownList("Champ1", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ2)
+                @Html.DropDownList("Champ2", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ3)
+                @Html.DropDownList("Champ3", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ4)
+                @Html.DropDownList("Champ4", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ5)
+                @Html.DropDownList("Champ5", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ6)
+                @Html.DropDownList("Champ6", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ22)
+                @Html.DropDownList("Champ22", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ23)
+                @Html.DropDownList("Champ23", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Champ24)
+                @Html.DropDownList("Champ24", Model.ChampTeams, new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+                }
+            </div>
+
+</div>

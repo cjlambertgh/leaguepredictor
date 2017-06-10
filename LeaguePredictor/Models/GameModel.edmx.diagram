@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b95be889d8684c739dd93107609d95e6" Name="Diagram1">
+        <EntityTypeShape EntityType="leaguepredictorModel.team" Width="1.5" PointX="8" PointY="1.875" />
+        <EntityTypeShape EntityType="leaguepredictorModel.league" Width="1.5" PointX="5.75" PointY="2.125" />
+        <AssociationConnector Association="leaguepredictorModel.FK__team__league_id__6754599E" />
+        <EntityTypeShape EntityType="leaguepredictorModel.players_selections" Width="1.5" PointX="10.25" PointY="1.875" />
+        <EntityTypeShape EntityType="leaguepredictorModel.team_rankings" Width="1.5" PointX="10.25" PointY="5" />
+        <AssociationConnector Association="leaguepredictorModel.FK__players_s__team___6E01572D" />
+        <AssociationConnector Association="leaguepredictorModel.FK__team_rank__team___6A30C649" />
+        <EntityTypeShape EntityType="leaguepredictorModel.player" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="leaguepredictorModel.FK_players_ID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

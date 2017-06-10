@@ -1,0 +1,28 @@
+﻿@using LeaguePredictor.Models
+@model List<LeaguePredictor.Models.LeagueTableModel>
+@{
+    ViewBag.Title = "League Table";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="row">
+    <table class="table table-striped">
+        <tr><th>Position</th>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Correct Predictions</th>
+        </tr>
+        @foreach (var ltm in Model.OrderBy(ltm => ltm.Points))
+        {
+            <tr>
+                <td>@ltm.Position</td>
+                <td>@ltm.Player</td>
+                <td>@ltm.Points</td>
+                <td>@ltm.Correct</td>
+            </tr>
+        }
+    </table>
+</div>
+
+

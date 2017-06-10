@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="leaguepredictorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="league">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="league_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="players">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="players_selections">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="player_id" Type="int" Nullable="false" />
+    <Property Name="team_id" Type="int" Nullable="false" />
+    <Property Name="position" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="team">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="team_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="league_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="team_rankings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="team_id" Type="int" Nullable="false" />
+    <Property Name="position" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__players_s__team___6E01572D">
+    <End Role="team" Type="Self.team" Multiplicity="1" />
+    <End Role="players_selections" Type="Self.players_selections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="players_selections">
+        <PropertyRef Name="team_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__team__league_id__6754599E">
+    <End Role="league" Type="Self.league" Multiplicity="1" />
+    <End Role="team" Type="Self.team" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="league">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="team">
+        <PropertyRef Name="league_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__team_rank__team___6A30C649">
+    <End Role="team" Type="Self.team" Multiplicity="1" />
+    <End Role="team_rankings" Type="Self.team_rankings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="team_rankings">
+        <PropertyRef Name="team_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_players_ID">
+    <End Role="players" Type="Self.players" Multiplicity="1" />
+    <End Role="players_selections" Type="Self.players_selections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="players">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="players_selections">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="leaguepredictorModelStoreContainer">
+    <EntitySet Name="league" EntityType="Self.league" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="players" EntityType="Self.players" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="players_selections" EntityType="Self.players_selections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="team_rankings" EntityType="Self.team_rankings" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__players_s__team___6E01572D" Association="Self.FK__players_s__team___6E01572D">
+      <End Role="team" EntitySet="team" />
+      <End Role="players_selections" EntitySet="players_selections" />
+    </AssociationSet>
+    <AssociationSet Name="FK__team__league_id__6754599E" Association="Self.FK__team__league_id__6754599E">
+      <End Role="league" EntitySet="league" />
+      <End Role="team" EntitySet="team" />
+    </AssociationSet>
+    <AssociationSet Name="FK__team_rank__team___6A30C649" Association="Self.FK__team_rank__team___6A30C649">
+      <End Role="team" EntitySet="team" />
+      <End Role="team_rankings" EntitySet="team_rankings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_players_ID" Association="Self.FK_players_ID">
+      <End Role="players" EntitySet="players" />
+      <End Role="players_selections" EntitySet="players_selections" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

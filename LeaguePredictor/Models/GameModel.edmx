@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="leaguepredictorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="league">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="league_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="players">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="players_selections">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="team_id" Type="int" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="league_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="team_rankings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_id" Type="int" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__players_s__team___6E01572D">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="players_selections" Type="Self.players_selections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_selections">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__team__league_id__6754599E">
+          <End Role="league" Type="Self.league" Multiplicity="1" />
+          <End Role="team" Type="Self.team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__team_rank__team___6A30C649">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="team_rankings" Type="Self.team_rankings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_rankings">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_players_ID">
+          <End Role="players" Type="Self.players" Multiplicity="1" />
+          <End Role="players_selections" Type="Self.players_selections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="players">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_selections">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="leaguepredictorModelStoreContainer">
+          <EntitySet Name="league" EntityType="Self.league" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="players" EntityType="Self.players" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="players_selections" EntityType="Self.players_selections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team_rankings" EntityType="Self.team_rankings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__players_s__team___6E01572D" Association="Self.FK__players_s__team___6E01572D">
+            <End Role="team" EntitySet="team" />
+            <End Role="players_selections" EntitySet="players_selections" />
+          </AssociationSet>
+          <AssociationSet Name="FK__team__league_id__6754599E" Association="Self.FK__team__league_id__6754599E">
+            <End Role="league" EntitySet="league" />
+            <End Role="team" EntitySet="team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__team_rank__team___6A30C649" Association="Self.FK__team_rank__team___6A30C649">
+            <End Role="team" EntitySet="team" />
+            <End Role="team_rankings" EntitySet="team_rankings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_players_ID" Association="Self.FK_players_ID">
+            <End Role="players" EntitySet="players" />
+            <End Role="players_selections" EntitySet="players_selections" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="leaguepredictorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="leaguepredictorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="teams" EntityType="leaguepredictorModel.team" />
+          <EntitySet Name="leagues" EntityType="leaguepredictorModel.league" />
+          <AssociationSet Name="FK__team__league_id__6754599E" Association="leaguepredictorModel.FK__team__league_id__6754599E">
+            <End Role="league" EntitySet="leagues" />
+            <End Role="team" EntitySet="teams" />
+          </AssociationSet>
+          <EntitySet Name="players_selections" EntityType="leaguepredictorModel.players_selections" />
+          <EntitySet Name="team_rankings" EntityType="leaguepredictorModel.team_rankings" />
+          <AssociationSet Name="FK__players_s__team___6E01572D" Association="leaguepredictorModel.FK__players_s__team___6E01572D">
+            <End Role="team" EntitySet="teams" />
+            <End Role="players_selections" EntitySet="players_selections" />
+          </AssociationSet>
+          <AssociationSet Name="FK__team_rank__team___6A30C649" Association="leaguepredictorModel.FK__team_rank__team___6A30C649">
+            <End Role="team" EntitySet="teams" />
+            <End Role="team_rankings" EntitySet="team_rankings" />
+          </AssociationSet>
+          <EntitySet Name="players" EntityType="leaguepredictorModel.player" />
+          <AssociationSet Name="FK_players_ID" Association="leaguepredictorModel.FK_players_ID">
+            <End Role="player" EntitySet="players" />
+            <End Role="players_selections" EntitySet="players_selections" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="league_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="league" Relationship="leaguepredictorModel.FK__team__league_id__6754599E" FromRole="team" ToRole="league" />
+          <NavigationProperty Name="players_selections" Relationship="leaguepredictorModel.FK__players_s__team___6E01572D" FromRole="team" ToRole="players_selections" />
+          <NavigationProperty Name="team_rankings" Relationship="leaguepredictorModel.FK__team_rank__team___6A30C649" FromRole="team" ToRole="team_rankings" />
+        </EntityType>
+        <EntityType Name="league">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="league_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="teams" Relationship="leaguepredictorModel.FK__team__league_id__6754599E" FromRole="league" ToRole="team" />
+        </EntityType>
+        <Association Name="FK__team__league_id__6754599E">
+          <End Type="leaguepredictorModel.league" Role="league" Multiplicity="1" />
+          <End Type="leaguepredictorModel.team" Role="team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="players_selections">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="player_id" Type="Int32" Nullable="false" />
+          <Property Name="team_id" Type="Int32" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="team" Relationship="leaguepredictorModel.FK__players_s__team___6E01572D" FromRole="players_selections" ToRole="team" />
+          <NavigationProperty Name="player" Relationship="leaguepredictorModel.FK_players_ID" FromRole="players_selections" ToRole="player" />
+        </EntityType>
+        <EntityType Name="team_rankings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_id" Type="Int32" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="team" Relationship="leaguepredictorModel.FK__team_rank__team___6A30C649" FromRole="team_rankings" ToRole="team" />
+        </EntityType>
+        <Association Name="FK__players_s__team___6E01572D">
+          <End Type="leaguepredictorModel.team" Role="team" Multiplicity="1" />
+          <End Type="leaguepredictorModel.players_selections" Role="players_selections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_selections">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__team_rank__team___6A30C649">
+          <End Type="leaguepredictorModel.team" Role="team" Multiplicity="1" />
+          <End Type="leaguepredictorModel.team_rankings" Role="team_rankings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="team_rankings">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="player">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="players_selections" Relationship="leaguepredictorModel.FK_players_ID" FromRole="player" ToRole="players_selections" />
+        </EntityType>
+        <Association Name="FK_players_ID">
+          <End Type="leaguepredictorModel.player" Role="player" Multiplicity="1" />
+          <End Type="leaguepredictorModel.players_selections" Role="players_selections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="player">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="players_selections">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="leaguepredictorModelStoreContainer" CdmEntityContainer="leaguepredictorEntities">
+          <EntitySetMapping Name="teams">
+            <EntityTypeMapping TypeName="leaguepredictorModel.team">
+              <MappingFragment StoreEntitySet="team">
+                <ScalarProperty Name="league_id" ColumnName="league_id" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leagues">
+            <EntityTypeMapping TypeName="leaguepredictorModel.league">
+              <MappingFragment StoreEntitySet="league">
+                <ScalarProperty Name="league_name" ColumnName="league_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="players_selections">
+            <EntityTypeMapping TypeName="leaguepredictorModel.players_selections">
+              <MappingFragment StoreEntitySet="players_selections">
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="team_rankings">
+            <EntityTypeMapping TypeName="leaguepredictorModel.team_rankings">
+              <MappingFragment StoreEntitySet="team_rankings">
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="players">
+            <EntityTypeMapping TypeName="leaguepredictorModel.player">
+              <MappingFragment StoreEntitySet="players">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
